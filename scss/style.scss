@@ -1,0 +1,957 @@
+// color setting
+$maincolor:#ff1f28;
+$subcolor:#fff;
+$pointcolor:#ff484f;
+$textfont:'NanumSquareRound',
+sans-serif;
+
+// 반응형
+$xl:1200px;
+$lg:1024px;
+$md:767px;
+$sm:640px;
+$xs:320px;
+
+@mixin responsive($media) {
+    @media screen and (max-width:$media) {
+        @content;
+    }
+}
+
+@mixin gap {
+    margin-bottom: 15vh;
+
+    @include responsive($md) {
+        margin-bottom: 8vw;
+    }
+}
+
+@mixin title-point($ti:25px, $size:55px) {
+    position: relative;
+    text-indent: $ti;
+
+    &::before {
+        content: "";
+        display: block;
+        width: $size;
+        height: $size;
+        background-color: $pointcolor;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 5px;
+    }
+}
+
+@mixin btn-position($w) {
+    width: $w;
+
+    .prevBtn {
+        float: left;
+    }
+
+    .nextBtn {
+        float: right;
+    }
+
+    li:hover {
+        i {
+            color: $pointcolor;
+        }
+    }
+}
+
+@mixin btn-mobile {
+
+    @include responsive($md) {
+        position: static;
+        width: 100px;
+        margin: 20px auto;
+        transform: initial;
+
+        a {
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            @include icon(#000, 25px);
+        }
+    }
+}
+
+@mixin text-font($fs:null) {
+    letter-spacing: 0;
+
+    font: {
+        family: $textfont;
+        size: $fs;
+    }
+}
+
+@mixin icon($c, $fs) {
+    i {
+        color: $c;
+        font-size: $fs;
+    }
+}
+
+// 공통사항
+
+.title {
+    span {
+        font: {
+            size: 30px;
+            weight: 700;
+        }
+
+        line-height: 2.5em;
+        position:relative;
+    }
+
+    @include title-point();
+
+    @include responsive($md) {
+        margin-left: 1em;
+
+        span {
+            font-size: 22px;
+            line-height: 2.6;
+            text-indent: 10px;
+
+        }
+
+        &::before {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+}
+
+.center {
+    width: $xl;
+    margin: 0 auto;
+
+    @include responsive($xl) {
+        width: 100%;
+    }
+
+}
+
+section {
+    @include gap;
+}
+
+/* header */
+
+header {
+    background-color: $maincolor;
+    text-align: center;
+
+    .logo {
+        .pcLogo {
+            display: block;
+            padding: 30px 0;
+
+            @include responsive($md) {
+                display: none;
+            }
+        }
+
+        .mobileLogo {
+            display: none;
+
+            @include responsive($md) {
+                display: block;
+                position: absolute;
+                top: 7px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
+            }
+        }
+    }
+
+
+    nav {
+        position: relative;
+        padding: 0 30px 15px;
+
+        @include responsive($md) {
+            padding: 13px 20px;
+        }
+
+        %m-padding {
+            @include responsive($md) {
+                padding-top: 5px;
+            }
+        }
+
+        .hamBtn {
+            float: left;
+            @include icon($subcolor, 21px);
+            @extend %m-padding;
+        }
+
+        .search {
+            float: right;
+            @include icon($subcolor, 21px);
+            @extend %m-padding;
+
+            input {
+                display: none;
+                border: none;
+                margin-right: 10px;
+            }
+
+        }
+
+        .mSearch {
+            width: 80%;
+            position: absolute;
+            z-index: 200;
+            top: 18px;
+            left: 0;
+            @include icon($maincolor, 21px);
+
+            input {
+                display: inline-block;
+                width: 40vw;
+                border: 1px solid #aaa;
+                border-radius: 10px;
+                padding: 5px;
+            }
+        }
+
+        .closeBtn {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 5%;
+            z-index: 200;
+            @include icon($subcolor, 30px);
+        }
+
+
+        .gnb {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+            @include responsive($md) {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                border-top: 1px solid $subcolor;
+                box-sizing: border-box;
+                background-color: $maincolor;
+                z-index: 1000;
+            }
+
+            li {
+                @include responsive($md) {
+                    width: 20%;
+
+                    &:hover {
+                        background-color: $subcolor;
+
+                        a {
+                            display: inline-block;
+                            width:100%;
+                            height:100%;
+                            color: $maincolor;
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                a {
+                    color: $subcolor;
+                    letter-spacing: 0.1em;
+
+                    font: {
+                        size: 21px;
+                        weight: 600;
+                    }
+
+
+
+                    @include responsive($md) {
+                        letter-spacing: -0.1em;
+
+                        font: {
+                            size: 17px;
+                            weight: 400;
+                        }
+                    }
+
+                    @include responsive(550px) {
+
+                        // font-size: 15px;
+                        span {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .mMenuBg {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            opacity: 0.4;
+            z-index: 10;
+        }
+
+        .menuWrap {
+            display: none;
+            width: 100%;
+            background-color: $subcolor;
+            position: absolute;
+            left: 0;
+            top: 43px;
+            z-index: 100;
+
+            @include responsive($md) {
+                top: 0;
+                width: 80%;
+            }
+
+            .title {
+                text-align: left;
+            }
+
+            .menuInner {
+                width: $xl;
+                margin: 30px auto;
+
+                @include responsive($xl) {
+                    width: $lg;
+                }
+
+                @include responsive($lg) {
+                    width: 97%;
+                }
+
+                @include responsive($md) {
+                    width: auto;
+                    padding: 10px;
+                    margin-top: 65px;
+                }
+
+                .mainMenu {
+                    float: left;
+                    // width: 41vw;
+
+                    @include responsive($md) {
+                        float: none;
+                    }
+
+                    #nav {
+
+                        // width:70%;
+                        >li {
+                            float: left;
+                            width: 130px;
+                            line-height: 2;
+
+                            @include responsive($lg) {
+                                width: 100px;
+                            }
+
+                            @include responsive($md) {
+                                float: none;
+                                width: auto;
+                                text-align: left;
+                                text-indent: 3em;
+
+                                .subTit {
+                                    @include text-font(16px);
+                                }
+                            }
+
+                            .subTit {
+                                font-size: 21px;
+
+                                @include responsive($lg) {
+                                    font-size: 19px;
+                                }
+                            }
+
+                            .sub {
+
+                                @include responsive($md) {
+                                    display: none;
+                                }
+
+                                li {
+                                    a {
+                                        color: #777;
+                                        @include text-font(18px);
+                                        font-weight: 500;
+
+                                        @include responsive($lg) {
+                                            font-size: 16px;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .global {
+                    float: right;
+                    width: 550px;
+
+                    @include responsive(1500px) {
+                        width: 440px;
+                    }
+
+                    @include responsive($lg) {
+                        width: 330px;
+                    }
+
+                    @include responsive($md) {
+                        float: none;
+                        width: auto;
+                        margin-top: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* container */
+
+#container {
+    .visualWrap {
+        width: 100%;
+        overflow: hidden;
+        margin-top: 5vw;
+
+        @include responsive($md) {
+            margin-top: 3vw;
+            // overflow-x: scroll;
+        }
+
+        .visualInner {
+            width: 800px;
+            // height: (1000px/1.53);
+            margin: 0 auto;
+            position: relative;
+
+            @include responsive($lg) {
+                // width: 700px;
+                // height: (800px/1.5);
+            }
+
+            @include responsive($md) {
+                width: 100%;
+                // height: 66vw;
+            }
+
+            .mainBanner {
+                width: 900%;
+                height: 100%;
+                margin-left: -100%;
+                position: relative;
+
+                li {
+                    float: left;
+                    width: (100%/9);
+                    height: 100%;
+                    opacity: 0.7;
+                    padding: 30px 80px;
+                    box-sizing: border-box;
+
+                    @include responsive($md) {
+                        padding: 0;
+                        opacity: 1;
+                    }
+
+                    &.active {
+                        opacity: 1;
+                        padding: 0 30px;
+
+                        @include responsive($md) {
+                            padding: 0;
+                        }
+                    }
+
+
+                    a {
+                        display: block;
+                        height: 100%;
+
+                        img {
+                            width: 100%;
+                            border-radius: 25px;
+
+                            @include responsive($md) {
+                                border-radius: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .arrowWrap {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                @include btn-position(110%);
+                @include icon(#aaa, 60px);
+                @include btn-mobile();
+            }
+        }
+    }
+
+    .tvWrap {
+        height: 430px;
+        padding: 100px 0;
+        position: relative;
+        background-color: #fff1f2;
+        overflow: hidden;
+
+        @include responsive($md) {
+            height: auto;
+            padding: 30px 0;
+        }
+
+        .title {
+            @include responsive($md) {
+                margin-left: 1em;
+            }
+        }
+
+        .tvInner {
+            // width: 1000px;
+            margin-left: 400px;
+            // overflow: hidden;
+            width: 500px;
+
+            @include responsive($md) {
+                margin-left: 0;
+                width: 100%;
+                padding-bottom: 50px;
+            }
+
+            .textWrap {
+                width: 400px;
+                height: 340px;
+                position: absolute;
+                left: 0;
+                z-index: 1;
+                padding-left: 5%;
+                background-color: #fff1f2;
+                box-sizing: border-box;
+
+                @include responsive($md) {
+                    width: 100%;
+                    height: 50px;
+                    bottom: 40px;
+                    z-index: 1;
+                }
+
+                li {
+                    text-align: center;
+                    padding-top: 60px;
+                    box-sizing: border-box;
+                    display: none;
+
+                    @include responsive($md) {
+                        padding-top: 0;
+                    }
+
+                    &.active {
+                        display: block;
+                    }
+
+                    .tvTit {
+                        color: $pointcolor;
+
+                        font: {
+                            size: 20px;
+                            weight: 600;
+                        }
+
+                        @include responsive($md) {
+                            display: none;
+                        }
+                    }
+
+                    .tvText {
+                        @include text-font(18px);
+                        margin: 50px 0;
+
+                        @include responsive($md) {
+                            display: none;
+                        }
+                    }
+
+                    .more {
+                        display: inline-block;
+                        width: 150px;
+                        padding: 10px;
+                        border-radius: 50px;
+                        border: 2px solid #ccc;
+
+                        @include responsive($md) {
+                            padding: 5px;
+                        }
+
+                        a {
+                            text-decoration: none;
+                            font-size: 16px;
+                        }
+
+                        &:hover {
+                            border-color: $pointcolor;
+                            background-color: $pointcolor;
+
+                            a {
+                                color: $subcolor;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .mainTv {
+                width: 400%;
+                height: 310px;
+                padding-top: 40px;
+                margin-left: -100%;
+                position: relative;
+
+                @include responsive($md) {
+                    // margin-left: 0;
+                    padding-top: 0;
+                    height: auto;
+                }
+
+                li {
+                    width: 25%;
+                    // height:100%;
+                    float: left;
+                    padding: 30px 50px;
+                    box-sizing: border-box;
+                    opacity: 0.8;
+
+
+                    &.active {
+                        opacity: 1;
+                        padding: 0;
+
+                        @include responsive($md) {
+                            padding: 30px 60px;
+                            width: auto;
+                        }
+                    }
+
+                    a {
+                        display: block;
+
+                        img {
+                            width: 100%;
+                            border-radius: 20px;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .arrowWrap {
+            // width: 190px;
+            width: 400px;
+            padding-left: 5%;
+            text-align: center;
+            box-sizing: border-box;
+            // padding-left: (400px-190)/2;
+            // display: flex;
+            // justify-content: space-around;
+            position: absolute;
+            left: 0;
+            bottom: 100px;
+            z-index: 2;
+
+            // @include responsive(1300px) {
+            //     left: 5%;
+            // }
+
+            // @include responsive(1000px) {
+            //     left: 1%;
+            // }
+
+            @include responsive($md) {
+                // max-width: 190px;
+                // width: 30vw;
+                width: auto;
+                top: 40px;
+                left: initial;
+                right: 10px;
+            }
+
+
+            @include responsive(415px) {
+                right: 5px;
+                top: 73px;
+            }
+
+
+            li {
+                display: inline-block;
+                padding: 0 7px;
+
+
+                @include responsive(415px) {
+                    padding: 0;
+                }
+
+                &:hover {
+                    i {
+                        color: $pointcolor;
+                    }
+                }
+
+                a {
+                    display: block;
+                    border: 1px solid #ccc;
+                    border-radius: 50%;
+
+                    @include icon(#000, 30px);
+
+                    @include responsive($md) {
+                        i {
+                            font-size: 25px;
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    .photosWrap {
+        overflow: hidden;
+        // position: relative;
+
+        // @include responsive($md) {
+        //     overflow-x: scroll;
+        // }
+
+        .title {
+            @include responsive($md) {
+                margin-left: 1em;
+            }
+        }
+
+        .photosInner {
+            margin: 4vw auto 0;
+            width: 15vw*6;
+            max-width: $xl;
+            position: relative;
+
+            @include responsive($md) {
+                width: 100vw;
+            }
+
+            .thumb {
+                width: 14/6*100%;
+                background-color: antiquewhite;
+                position: relative;
+                margin-left: -100%;
+
+                @include responsive($md) {
+                    width: 14/4*100%;
+                    // margin-left: 0;
+                }
+
+                li {
+                    float: left;
+                    width: (100%/14);
+                    opacity: 1;
+
+                    img {
+                        width: 15vw;
+                        max-width: 200px;
+
+                        @include responsive($md) {
+                            width: 25vw;
+                        }
+                    }
+                }
+            }
+        }
+
+        .arrowWrap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            @include btn-position(110%);
+            @include icon(#000, 50px);
+            @include btn-mobile();
+
+            // li:hover {
+            //     i {
+            //         color: #000;
+            //     }
+            // }
+
+            // @include responsive($md) {
+            //     // display: none;
+            //     top:10px;
+            //     left:initial;
+            //     right:10px;
+            //     transform: initial;
+            //     width:100px;
+            //     a{
+            //         display:inline-block;
+            //         border:1px solid #ccc;
+            //         border-radius:50%;
+            //         @include icon(#000,25px);
+            //     }
+            // }
+
+            // @include responsive(420px){
+            @include responsive($md) {
+                position: static;
+                width: 100px;
+                margin: 20px auto;
+                transform: initial;
+
+                a {
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    border-radius: 50%;
+                    @include icon(#000, 25px);
+                }
+            }
+
+        }
+    }
+
+
+    .snsWrap {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        @include gap;
+
+        @include responsive(400px) {
+            .title {
+                span {
+                    font-size: 20px;
+                    letter-spacing: -0.1em;
+                }
+            }
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+            width: 60%;
+
+            @include responsive($lg) {
+                width: 50%;
+            }
+
+            @include responsive(850px) {
+                margin: 20px auto;
+                width: 60%;
+            }
+
+            li {
+                a {
+                    img {
+                        width: 60px;
+
+                        @include responsive($md) {
+                            max-width: 50px;
+                            width: 10vw;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* footer */
+
+footer {
+    background-color: $maincolor;
+    text-align: center;
+
+    padding: {
+        top: 30px;
+        bottom: 40px;
+    }
+
+    @include responsive($md) {
+        padding: 10px 10px 80px;
+    }
+
+    .fnb {
+        margin-bottom: 3vw;
+
+        li {
+            display: inline-block;
+            margin-right: 2vw;
+            position: relative;
+
+            a {
+                color: $subcolor;
+                @include text-font(16px);
+
+                @include responsive($md) {
+                    font-size: 14px;
+                }
+            }
+
+            &::after {
+                content: "";
+                display: block;
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+                background-color: $subcolor;
+                position: absolute;
+                right: -1.3vw;
+                top: 50%;
+            }
+
+            &:last-child::after {
+                display: none;
+            }
+        }
+    }
+
+    .fLogo {
+        @include responsive($xs) {
+            display: none;
+        }
+    }
+
+    .copyright {
+        color: $subcolor;
+        font-size: 13px;
+
+        @include responsive($md) {
+            font-size: 12px;
+        }
+    }
+}

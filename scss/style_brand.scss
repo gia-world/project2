@@ -1,0 +1,640 @@
+// color setting
+$maincolor:#ff1f28;
+$subcolor:#fff;
+$pointcolor:#ff484f;
+$textfont:'NanumSquareRound',
+sans-serif;
+
+// 반응형
+$xl:1200px;
+$lg:1024px;
+$md:767px;
+$sm:640px;
+$xs:320px;
+
+@mixin responsive($media) {
+    @media screen and (max-width:$media) {
+        @content;
+    }
+}
+
+@mixin gap {
+    margin-bottom: 15vh;
+
+    @include responsive($md) {
+        margin-bottom: 8vw;
+    }
+}
+
+@mixin title-point($ti:25px, $size:55px) {
+    position: relative;
+    text-indent: $ti;
+
+    &::before {
+        content: "";
+        display: block;
+        width: $size;
+        height: $size;
+        background-color: $pointcolor;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 5px;
+    }
+}
+
+@mixin btn-position($w) {
+    width: $w;
+
+    .prevBtn {
+        float: left;
+    }
+
+    .nextBtn {
+        float: right;
+    }
+}
+
+@mixin text-font($fs:null) {
+    letter-spacing: 0;
+
+    font: {
+        family: $textfont;
+        size: $fs;
+    }
+}
+
+@mixin icon($c, $fs) {
+    i {
+        color: $c;
+        font-size: $fs;
+    }
+}
+
+// 공통사항
+
+.title {
+    span {
+        font: {
+            size: 30px;
+            weight: 700;
+        }
+
+        line-height: 2.5em;
+        position:relative;
+    }
+
+    @include title-point();
+
+    @include responsive($md) {
+        margin-left: 1em;
+
+        span {
+            font-size: 22px;
+            line-height: 2.6;
+            text-indent: 10px;
+
+        }
+
+        &::before {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+}
+
+.center {
+    width: $xl;
+    margin: 0 auto;
+
+    @include responsive($xl) {
+        width: 100%;
+    }
+
+}
+
+section {
+    @include gap;
+}
+
+/* header */
+
+header {
+    background-color: $maincolor;
+    text-align: center;
+
+    .logo {
+        .pcLogo {
+            display: block;
+            padding: 30px 0;
+
+            @include responsive($md) {
+                display: none;
+            }
+        }
+
+        .mobileLogo {
+            display: none;
+
+            @include responsive($md) {
+                display: block;
+                position: absolute;
+                top: 7px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
+            }
+        }
+    }
+
+
+    nav {
+        position: relative;
+        padding: 0 30px 15px;
+
+        @include responsive($md) {
+            padding: 13px 20px;
+        }
+
+        %m-padding {
+            @include responsive($md) {
+                padding-top: 5px;
+            }
+        }
+
+        .hamBtn {
+            float: left;
+            @include icon($subcolor, 21px);
+            @extend %m-padding;
+        }
+
+        .search {
+            float: right;
+            @include icon($subcolor, 21px);
+            @extend %m-padding;
+
+            input {
+                display: none;
+                border: none;
+                margin-right: 10px;
+            }
+
+        }
+
+        .mSearch {
+            width: 80%;
+            position: absolute;
+            z-index: 200;
+            top: 18px;
+            left: 0;
+            @include icon($maincolor, 21px);
+
+            input {
+                display: inline-block;
+                width: 40vw;
+                border: 1px solid #aaa;
+                border-radius: 10px;
+                padding: 5px;
+            }
+        }
+
+        .closeBtn {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 5%;
+            z-index: 200;
+            @include icon($subcolor, 30px);
+        }
+
+
+        .gnb {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+            @include responsive($md) {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                border-top: 1px solid $subcolor;
+                box-sizing: border-box;
+                background-color: $maincolor;
+                z-index: 1000;
+            }
+
+            li {
+                @include responsive($md) {
+                    width: 20%;
+
+                    &:hover {
+                        background-color: $subcolor;
+
+                        a {
+                            display: inline-block;
+                            width: 100%;
+                            height: 100%;
+                            color: $maincolor;
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                a {
+                    color: $subcolor;
+                    letter-spacing: 0.1em;
+
+                    font: {
+                        size: 21px;
+                        weight: 600;
+                    }
+
+
+
+                    @include responsive($md) {
+                        letter-spacing: -0.1em;
+
+                        font: {
+                            size: 17px;
+                            weight: 400;
+                        }
+                    }
+
+                    @include responsive(550px) {
+
+                        // font-size: 15px;
+                        span {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .mMenuBg {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            opacity: 0.4;
+            z-index: 10;
+        }
+
+        .menuWrap {
+            display: none;
+            width: 100%;
+            background-color: $subcolor;
+            position: absolute;
+            left: 0;
+            top: 43px;
+            z-index: 100;
+
+            @include responsive($md) {
+                top: 0;
+                width: 80%;
+            }
+
+            .title {
+                text-align: left;
+            }
+
+            .menuInner {
+                width: $xl;
+                margin: 30px auto;
+
+                @include responsive($xl) {
+                    width: $lg;
+                }
+
+                @include responsive($lg) {
+                    width: 97%;
+                }
+
+                @include responsive($md) {
+                    width: auto;
+                    padding: 10px;
+                    margin-top: 65px;
+                }
+
+                .mainMenu {
+                    float: left;
+                    // width: 41vw;
+
+                    @include responsive($md) {
+                        float: none;
+                    }
+
+                    #nav {
+
+                        // width:70%;
+                        >li {
+                            float: left;
+                            width: 130px;
+                            line-height: 2;
+
+                            @include responsive($lg) {
+                                width: 100px;
+                            }
+
+                            @include responsive($md) {
+                                float: none;
+                                width: auto;
+                                text-align: left;
+                                text-indent: 3em;
+
+                                .subTit {
+                                    @include text-font(16px);
+                                }
+                            }
+
+                            .subTit {
+                                font-size: 21px;
+
+                                @include responsive($lg) {
+                                    font-size: 19px;
+                                }
+                            }
+
+                            .sub {
+
+                                @include responsive($md) {
+                                    display: none;
+                                }
+
+                                li {
+                                    a {
+                                        color: #777;
+                                        @include text-font(18px);
+                                        font-weight: 500;
+
+                                        @include responsive($lg) {
+                                            font-size: 16px;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .global {
+                    float: right;
+                    width: 550px;
+
+                    @include responsive(1500px) {
+                        width: 440px;
+                    }
+
+                    @include responsive($lg) {
+                        width: 330px;
+                    }
+
+                    @include responsive($md) {
+                        float: none;
+                        width: auto;
+                        margin-top: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* container */
+
+
+#container {
+    .headWrap {
+        position: relative;
+
+        .parallax-window {
+            height:380px;
+            background: transparent;
+            @include responsive($md){
+                height:150px;
+            }
+        }
+
+        .sub_title {
+            @include title-point(0, 55px);
+            position: absolute;
+            top: 270px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+
+            @include responsive($md) {
+                top: 50px;
+            }
+
+            span {
+                font: {
+                    family: 'Sacramento', cursive;
+                    size: 60px;
+                }
+
+                letter-spacing: 0.01em;
+                color:$subcolor;
+
+                @include responsive($md) {
+                    font-size: 50px;
+                    letter-spacing: -0.01em;
+                }
+            }
+
+            &::before {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 80px;
+
+                @include responsive($md) {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+    }
+
+    .introWrap {
+        height: 500px;
+        margin-top: 120px;
+        text-align: center;
+
+        @include responsive($sm) {
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .intro {
+            width: (100%/3);
+            height: 100%;
+            float: left;
+            // background-color: aqua;
+
+            @include responsive($sm) {
+                float: none;
+                width: 100%;
+                height: 150px;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .intImg {
+                display: inline-block;
+                width: 200px;
+                height: 200px;
+                margin: 20px 0;
+
+                @include responsive($sm) {
+                    width: 20vw;
+                    height: 20vw;
+                    margin: 0;
+                }
+
+                // 배경이미지로 넣을까?
+                img {
+                    width: 90%;
+                    height: 90%;
+                    border-radius: 50%;
+                }
+            }
+
+            .text {
+                padding: 0 20px;
+                word-break: keep-all;
+                line-height: 1.7em;
+                @include text-font(17px);
+
+                @include responsive($sm) {
+                    float: right;
+                    width: 65vw;
+                    padding: 0;
+                    // height:100%;
+                }
+
+                @include responsive(500px) {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+
+
+    .brandWrap {
+        .item {
+            width: 900px;
+            margin: 50px auto;
+            border: 1px solid rgb(221, 221, 221);
+
+            @include responsive(1000px) {
+                width: 700px;
+            }
+
+            @include responsive($md) {
+                width: 80vw;
+            }
+
+            li {
+                background-color: $subcolor;
+                float: left;
+                width: (100%/4);
+                height: 150px;
+                box-sizing: border-box;
+                border: 1px solid rgb(221, 221, 221);
+                text-align: center;
+
+                @include responsive($md) {
+                    width: (100%/3);
+                    margin: 0;
+                }
+
+                @include responsive(500px) {
+                    width: 50%;
+                }
+
+                img {
+                    margin: 30px 0 15px;
+                }
+
+                .bName {
+                    @include text-font(15px);
+                }
+            }
+        }
+    }
+}
+
+/* footer */
+
+footer {
+    background-color: $maincolor;
+    text-align: center;
+
+    padding: {
+        top: 30px;
+        bottom: 40px;
+    }
+
+    @include responsive($md) {
+        padding: 10px 10px 80px;
+    }
+
+    .fnb {
+        margin-bottom: 3vw;
+
+        li {
+            display: inline-block;
+            margin-right: 2vw;
+            position: relative;
+
+            a {
+                color: $subcolor;
+                @include text-font(16px);
+
+                @include responsive($md) {
+                    font-size: 14px;
+                }
+            }
+
+            &::after {
+                content: "";
+                display: block;
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+                background-color: $subcolor;
+                position: absolute;
+                right: -1.3vw;
+                top: 50%;
+            }
+
+            &:last-child::after {
+                display: none;
+            }
+        }
+    }
+
+    .fLogo {
+        @include responsive($xs) {
+            display: none;
+        }
+    }
+
+    .copyright {
+        color: $subcolor;
+        font-size: 13px;
+
+        @include responsive($md) {
+            font-size: 12px;
+        }
+    }
+}

@@ -1,0 +1,174 @@
+/* 서브페이지 */
+
+#container {
+    .headWrap {
+        position: relative;
+
+
+        @include responsive($md) {
+            height: auto;
+        }
+
+        // .parallax-window {
+        //     .parallax-container{
+        //     width: 100%;
+        //     height: 380px;
+        //     background: transparent center center;
+        //     // border:1px solid black;
+
+        //     @include responsive($md) {
+        //         height: 150px;
+        //     }
+        // }
+
+
+        .sub_title {
+            @include title-point(0, 55px);
+            position: absolute;
+            top: 255px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+
+            @include responsive($md) {
+                top: 50px;
+            }
+
+            span {
+                font: {
+                    family: 'Sacramento', cursive;
+                    size: 60px;
+                }
+
+                letter-spacing: 0.01em;
+                color:$subcolor;
+
+                @include responsive($md) {
+                    font-size: 50px;
+                    letter-spacing: -0.01em;
+                }
+            }
+
+            &::before {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 80px;
+
+                @include responsive($md) {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+    }
+
+    .introWrap {
+        height: 500px;
+        margin-top: 120px;
+        text-align: center;
+
+        @include responsive($sm) {
+            margin-top: 80px;
+            text-align: left;
+        }
+
+        .intro {
+            width: (100%/3);
+            height: 100%;
+            float: left;
+            // background-color: aqua;
+
+            @include responsive($sm) {
+                float: none;
+                width: 100%;
+                height: 150px;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .intImg {
+                display: inline-block;
+                width: 200px;
+                height: 200px;
+                margin: 20px 0;
+
+                @include responsive($sm) {
+                    width: 20vw;
+                    height: 20vw;
+                    margin: 0;
+                }
+
+                // 배경이미지로 넣을까?
+                img {
+                    width: 90%;
+                    height: 90%;
+                    border-radius: 50%;
+                }
+            }
+
+            .text {
+                padding: 0 20px;
+                word-break: keep-all;
+                line-height: 1.7em;
+                @include text-font(17px);
+
+                @include responsive($sm) {
+                    float: right;
+                    width: 65vw;
+                    padding: 0;
+                    // height:100%;
+                }
+
+                @include responsive(500px) {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+
+
+    .brandWrap {
+        .item {
+            width: 900px;
+            margin: 50px auto;
+            border: 1px solid rgb(221, 221, 221);
+
+            @include responsive(1000px) {
+                width: 700px;
+            }
+
+            @include responsive($md) {
+                width: 90vw;
+            }
+
+            li {
+                background-color: $subcolor;
+                float: left;
+                width: (100%/4);
+                height: 150px;
+                box-sizing: border-box;
+                border: 1px solid rgb(221, 221, 221);
+                text-align: center;
+
+                @include responsive($md) {
+                    width: (100%/3);
+                    margin: 0;
+                }
+
+                @include responsive(500px) {
+                    width: 50%;
+                }
+
+                img {
+                    margin: 30px 0 15px;
+                }
+
+                .bName {
+                    @include text-font(15px);
+                }
+            }
+        }
+    }
+}
