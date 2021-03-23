@@ -288,8 +288,6 @@ header {
                     }
 
                     @include responsive(550px) {
-
-                        // font-size: 15px;
                         span {
                             display: none;
                         }
@@ -346,15 +344,12 @@ header {
 
                 .mainMenu {
                     float: left;
-                    // width: 41vw;
 
                     @include responsive($md) {
                         float: none;
                     }
 
                     #nav {
-
-                        // width:70%;
                         >li {
                             float: left;
                             width: 130px;
@@ -440,23 +435,15 @@ header {
 
         @include responsive($md) {
             margin-top: 3vw;
-            // overflow-x: scroll;
         }
 
         .visualInner {
             width: 800px;
-            // height: (1000px/1.53);
             margin: 0 auto;
             position: relative;
 
-            @include responsive($lg) {
-                // width: 700px;
-                // height: (800px/1.5);
-            }
-
             @include responsive($md) {
                 width: 100%;
-                // height: 66vw;
             }
 
             .mainBanner {
@@ -535,9 +522,7 @@ header {
         }
 
         .tvInner {
-            // width: 1000px;
             margin-left: 400px;
-            // overflow: hidden;
             width: 500px;
 
             @include responsive($md) {
@@ -635,14 +620,12 @@ header {
                 position: relative;
 
                 @include responsive($md) {
-                    // margin-left: 0;
                     padding-top: 0;
                     height: auto;
                 }
 
                 li {
                     width: 25%;
-                    // height:100%;
                     float: left;
                     padding: 30px 50px;
                     box-sizing: border-box;
@@ -673,30 +656,16 @@ header {
         }
 
         .arrowWrap {
-            // width: 190px;
             width: 400px;
             padding-left: 5%;
             text-align: center;
             box-sizing: border-box;
-            // padding-left: (400px-190)/2;
-            // display: flex;
-            // justify-content: space-around;
             position: absolute;
             left: 0;
             bottom: 100px;
             z-index: 2;
 
-            // @include responsive(1300px) {
-            //     left: 5%;
-            // }
-
-            // @include responsive(1000px) {
-            //     left: 1%;
-            // }
-
             @include responsive($md) {
-                // max-width: 190px;
-                // width: 30vw;
                 width: auto;
                 top: 40px;
                 left: initial;
@@ -746,11 +715,6 @@ header {
 
     .photosWrap {
         overflow: hidden;
-        // position: relative;
-
-        // @include responsive($md) {
-        //     overflow-x: scroll;
-        // }
 
         .title {
             @include responsive($md) {
@@ -776,7 +740,6 @@ header {
 
                 @include responsive($md) {
                     width: 14/4*100%;
-                    // margin-left: 0;
                 }
 
                 li {
@@ -804,29 +767,6 @@ header {
             @include btn-position(110%);
             @include icon(#000, 50px);
             @include btn-mobile();
-
-            // li:hover {
-            //     i {
-            //         color: #000;
-            //     }
-            // }
-
-            // @include responsive($md) {
-            //     // display: none;
-            //     top:10px;
-            //     left:initial;
-            //     right:10px;
-            //     transform: initial;
-            //     width:100px;
-            //     a{
-            //         display:inline-block;
-            //         border:1px solid #ccc;
-            //         border-radius:50%;
-            //         @include icon(#000,25px);
-            //     }
-            // }
-
-            // @include responsive(420px){
             @include responsive($md) {
                 position: static;
                 width: 100px;

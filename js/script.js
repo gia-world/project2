@@ -30,11 +30,6 @@ $(document).ready(function () {
     if (widthW > 767) {
       $(".menuWrap").css("display", "none");
     }
-    // else {
-    //   $(".search").removeClass("mSearch");
-    //   $(".closeBtn").css("display", "none");
-    // }
-
   })
 
 
